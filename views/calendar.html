@@ -69,13 +69,13 @@
                 <!-- Event Name -->
                 <div class="mb-3">
                     <label for="eventName" class="form-label">Event Name</label>
-                    <input type="text" class="form-control" id="event_name" placeholder="Enter event name">
+                    <input type="text" class="form-control" id="event_name" placeholder="Enter event name" required>
                 </div>
 
                 <!-- Category -->
                 <div class="mb-3">
-                    <label for="Category" class="form-label">Category</label>
-                    <select class="form-select" id="event_category">
+                    <label for="event_category" class="form-label">Category</label>
+                    <select class="form-control" id="event_category" required>
                         <option selected disabled>Select a category</option>
                         <option>Academic</option>
                         <option>Work</option>
@@ -90,7 +90,7 @@
                 <!-- Weekday -->
                 <div class="mb-3">
                     <label for="weekday" class="form-label">Weekday</label>
-                    <select class="form-select" id="event_weekday">
+                    <select class="form-control" id="event_weekday" required>
                         <option selected disabled>Select a day</option>
                         <option>Monday</option>
                         <option>Tuesday</option>
@@ -111,9 +111,8 @@
                 <!-- Event Modality -->
                 <div class="mb-3">
                     <label for="modality" class="form-label">Event Modality</label>
-                    <select class="form-select" id="event_modality" required onchange="updateLocationOptions(this.value)">
-                        <option selected disabled>Select modality</option>
-                        <option value="In-Person">In-Person</option>
+                    <select class="form-control" id="event_modality" required onchange="updateLocationOptions(this.value)">
+                        <option value="In-Person" default>In-Person</option>
                         <option value="Remote">Remote</option>
                     </select>
                 </div>
@@ -127,17 +126,17 @@
                 <!-- Remote URL -->
                 <div class="mb-3 d-none" id="event_remote_url_group">
                     <label for="remoteUrl" class="form-label">Remote URL</label>
-                    <input type="url" class="form-control" id="event_remote_url" placeholder="https://example.com">
+                    <input type="url" class="form-control" id="event_remote_url" pattern="[a-zA-Z]+://[^ ]+\.[^ ]+">
                 </div>
 
                 <!-- Attendees -->
                 <div class="mb-3">
                     <label for="attendees" class="form-label">Attendees</label>
-                    <input type="text" class="form-control" id="event_attendees" placeholder="Firstname Lastname, Firstname, Mr. Lastname...">
+                    <input type="text" class="form-control" id="event_attendees" placeholder="Firstname Lastname, Firstname, Mr. Lastname..." required>
                 </div>
 
                 <!-- Submit -->
-                <button class="btn btn-primary" type="button" onclick="saveEvent()" data-bs-dismiss="modal">
+                <button class="btn btn-primary" type="submit">
                     Save Event
                 </button>
             </form>

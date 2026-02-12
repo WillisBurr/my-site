@@ -1,18 +1,41 @@
+document.getElementById("event_form").addEventListener('submit', function(event) {
+    if (!this.checkValidity()) {
+        event.preventDefault();
+        this.reportValidity(); // Shows native validation messages
+        return;
+    }
+
+    event.preventDefault(); // Prevent actual form submit
+    saveEvent();
+});
+updateLocationOptions(document.getElementById("event_modality").value);
+
+// let eventModal = document.getElementById("event_modal");
+// const bootstrapModal = bootstrap.Modal.getOrCreateInstance(eventModal);
+
 function updateLocationOptions(modality) {
     const locationGroup = document.getElementById("event_location_group");
     const remoteUrlGroup = document.getElementById("event_remote_url_group");
 
+    const locationInput = document.getElementById("event_location");
+    const eventUrlInput = document.getElementById("event_remote_url");
+
     locationGroup.classList.add("d-none");
     remoteUrlGroup.classList.add("d-none");
+
+    eventUrlInput.removeAttribute("required");
+    locationInput.removeAttribute("required");
 
     
 
     if (modality === "In-Person") {
         locationGroup.classList.remove("d-none");
+        locationInput.setAttribute("required", "required");
 
     }
     else if (modality === "Remote") {
         remoteUrlGroup.classList.remove("d-none");
+        eventUrlInput.setAttribute("required", "required");
     }
     else {
         return;
@@ -20,8 +43,11 @@ function updateLocationOptions(modality) {
 }
 
 function saveEvent() {
-    
-    
+
+    if (!(document.getElementById('event_form').checkValidity())) {
+        return;
+    }
+
     const eventDetails = {
         name: document.getElementById("event_name").value, // name of the event from the form,
         category: document.getElementById("event_category").value, // category of the event from the form,
@@ -50,6 +76,7 @@ function saveEvent() {
     addEventToCalendarUI(eventDetails);
 
     document.getElementById('event_form').reset();
+    // bootstrapModal.hide();
 }
 
 function addEventToCalendarUI(eventDetails) {
